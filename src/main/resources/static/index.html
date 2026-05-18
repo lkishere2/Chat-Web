@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>WebSocket Test Client</h2>
-<input type="text" id="msgInput" placeholder="Type a message..." />
-<button onclick="sendMessage()">Send</button>
-<ul id="messages"></ul>
+    <h2>WebSocket Test Client</h2>
+    <input type="text" id="msgInput" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+    <ul id="messages"></ul>
 
-<script>
-    // Connect to the WebSocket
-    const socket = new WebSocket('ws://localhost:8080/ws');
+    <script>
+        // Connect to the WebSocket
+        // When user activate this page, they automatically connect to the WS
+        // When they close the tab, navigate to other, or refresh, the connection just goes down
+        const socket = new WebSocket('ws://localhost:8080/ws');
+        socket.onopen = () => console.log('Connected to server');
 
-    socket.onopen = () => console.log('Connected to server');
+        // Listen for messages from the server, and render it to the FE
+        socket.onmessage = (event) => {
+            const li = document.createElement('li');
+            li.textContent = event.data;
+            document.getElementById('messages').appendChild(li);
+        };
 
-    // Listen for messages from the server
-    socket.onmessage = (event) => {
-        const li = document.createElement('li');
-        li.textContent = event.data;
-        document.getElementById('messages').appendChild(li);
-    };
-
-    // Send a message
-    function sendMessage() {
-        const input = document.getElementById('msgInput');
-        socket.send(input.value);
-        input.value = '';
-    }
-</script>
+        // Send a message
+        function sendMessage() {
+            const input = document.getElementById('msgInput');
+            socket.send(input.value);
+            input.value = '';
+        }
+    </script>
 </body>
 </html>
