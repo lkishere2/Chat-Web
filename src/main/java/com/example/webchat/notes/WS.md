@@ -1,3 +1,4 @@
+Day 1 of learning WS
 # What is WebSocket?
 - WebSocket is a persistent, full-duplex communication channel over a single TCP connection.
 - A simple example would be WebSocket is an upgrade version of HTTP

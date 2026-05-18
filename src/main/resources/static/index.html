@@ -7,6 +7,27 @@
     <ul id="messages"></ul>
 
     <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchHistory();
+        });
+
+        function fetchHistory() {
+            fetch('http://localhost:8080/api/messages')
+                .then(response => response.json())
+                .then(messages => {
+                    const messagesList = document.getElementById("messages");
+                    messages.forEach(msg => {
+                        const li = document.createElement('li');
+                        if (msg.sender && msg.content) {
+                            li.textContent = `${msg.sender}: ${msg.content}`;
+                        } else {
+                            li.textContent = msg.content || JSON.stringify(msg);
+                        }
+                        messagesList.appendChild(li);
+                    })
+                })
+        }
+
         // Connect to the WebSocket
         // When user activate this page, they automatically connect to the WS
         // When they close the tab, navigate to other, or refresh, the connection just goes down
