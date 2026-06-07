@@ -1,10 +1,9 @@
 package com.example.webchat.chat;
 
+import com.example.webchat.room.Room;
+import com.example.webchat.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,11 +19,28 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String sender;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User receiver;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User sender;
+
+    @Enumerated(EnumType.STRING)
+    private MessageType type;
 
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
     @Builder.Default
     private LocalDateTime timestamp = LocalDateTime.now();
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    private Room room;
+
 }
