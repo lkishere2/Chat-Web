@@ -1,5 +1,6 @@
-package com.example.webchat.user;
+package com.example.webchat.room.models;
 
+import com.example.webchat.user.models.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,20 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "friends")
-public class Friend {
+@Table(name = "room_user")
+public class RoomUser {
 
     @EmbeddedId
-    private FriendId id;
+    private RoomUserId id;
+
+    @ManyToOne
+    @MapsId("roomId")
+    private Room room;
 
     @ManyToOne
     @MapsId("userId")
     private User user;
 
-    @ManyToOne
-    @MapsId("friendId")
-    private User friend;
-
-    @Enumerated(EnumType.STRING)
-    private FriendStatus status;
 }

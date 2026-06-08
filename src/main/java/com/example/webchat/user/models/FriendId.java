@@ -1,4 +1,4 @@
-package com.example.webchat.room;
+package com.example.webchat.user.models;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomUserId implements Serializable {
-    private Long roomId;
+public class FriendId implements Serializable {
     private Long userId;
+    private Long friendId;
 }

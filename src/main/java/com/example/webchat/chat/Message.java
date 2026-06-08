@@ -1,7 +1,7 @@
 package com.example.webchat.chat;
 
-import com.example.webchat.room.Room;
-import com.example.webchat.user.User;
+import com.example.webchat.room.models.Room;
+import com.example.webchat.user.models.User;
 import jakarta.persistence.*;
 import lombok.*;
 

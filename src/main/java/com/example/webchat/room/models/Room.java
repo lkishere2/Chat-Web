@@ -1,4 +1,4 @@
-package com.example.webchat.room;
+package com.example.webchat.room.models;
 
 import com.example.webchat.chat.Message;
 import jakarta.persistence.*;
